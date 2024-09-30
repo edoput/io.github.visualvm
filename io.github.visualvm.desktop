@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=visualVM
+Categories=Development
+Encoding=UTF-8
+Type=Application
+Exec=/app/visualvm/bin/visualvm
+TryExec=/app/visualvm/bin/visualvm
+Terminal=false
+StartupNotify=true

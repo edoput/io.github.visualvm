@@ -1,0 +1,43 @@
+id: io.github.visualvm
+branch: '2.1.10'
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk
+finish-args:
+  # setup JRE and JDK path
+  - --env=PATH=/app/jre/bin:/usr/bin
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # GPU acceleration if needed
+  - --device=dri
+  # Needs to talk to the network:
+  - --share=network
+  - --persist=.visualvm
+command: /app/visualvm/bin/visualvm
+modules:
+  - name: install-openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk/install.sh
+  - name: install-visualvm
+    sources:
+      - type: archive
+        url: 'https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip'
+        archive-type: 'zip'
+        sha256: 87850af9e9873c690cbb76056627e73dfbfd1e1d95279a9031722a85ac36d999
+    buildsystem: simple
+    build-commands:
+      - mkdir -p ${FLATPAK_DEST}/visualvm
+      - cp -ar * ${FLATPAK_DEST}/visualvm
+    build-options:
+      strip: true # debugedit craps otherwise
+  - name: install-desktop-app
+    sources:
+      - type: file
+        path: io.github.visualvm.desktop
+    buildsystem: simple
+    build-commands:
+      - install -D --target-directory=${FLATPAK_DEST}/share/applications -m444 ${FLATPAK_ID}.desktop
