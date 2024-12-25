@@ -33,7 +33,7 @@ modules:
       - mkdir -p ${FLATPAK_DEST}/visualvm
       - cp -ar * ${FLATPAK_DEST}/visualvm
     build-options:
-      strip: true # debugedit craps otherwise
+      strip: false # debugedit craps otherwise
   - name: install-desktop-app
     sources:
       - type: file
