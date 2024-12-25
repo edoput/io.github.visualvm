@@ -32,8 +32,9 @@ modules:
     build-commands:
       - mkdir -p ${FLATPAK_DEST}/visualvm
       - cp -ar * ${FLATPAK_DEST}/visualvm
+      - rm -rf ${FLATPAK_DEST}/visualvm/platform/modules/lib/riscv64
     build-options:
-      strip: false # debugedit craps otherwise
+      strip: true # debugedit craps otherwise
   - name: install-desktop-app
     sources:
       - type: file
