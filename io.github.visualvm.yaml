@@ -5,7 +5,6 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk
-no-debuginfo: true
 finish-args:
   # setup JRE and JDK path
   - --env=PATH=/app/jre/bin:/usr/bin
@@ -35,6 +34,7 @@ modules:
       - cp -ar * ${FLATPAK_DEST}/visualvm
     build-options:
       strip: false # debugedit fails otherwise
+      no-debuginfo: true
   - name: install-desktop-app
     sources:
       - type: file
