@@ -33,6 +33,7 @@ modules:
       - mkdir -p ${FLATPAK_DEST}/visualvm
       - cp -ar * ${FLATPAK_DEST}/visualvm
       - rm -rf ${FLATPAK_DEST}/visualvm/platform/modules/lib/riscv64
+      - rm -rf ${FLATPAK_DEST}/visualvm/platform/modules/lib/aarch64
     build-options:
       strip: true # debugedit craps otherwise
   - name: install-desktop-app
